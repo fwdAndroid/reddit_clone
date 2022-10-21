@@ -12,9 +12,9 @@ class CommunityScreen extends ConsumerWidget {
 
   // http://localhost:4000/r/flutter
 
-  // void navigateToModTools(BuildContext context) {
-  //   Routemaster.of(context).push('/mod-tools/$name');
-  // }
+  void navigateToModTools(BuildContext context) {
+    Routemaster.of(context).push('/mod-tools/$name');
+  }
 
   // void joinCommunity(WidgetRef ref, Community community, BuildContext context) {
   //   ref.read(communityControllerProvider.notifier).joinCommunity(community, context);
@@ -71,9 +71,8 @@ class CommunityScreen extends ConsumerWidget {
                               // if (!isGuest)
                               community.mods.contains(user.uid)
                                   ? OutlinedButton(
-                                      onPressed: () {
-                                        // navigateToModTools(context);
-                                      },
+                                      onPressed: () =>
+                                          navigateToModTools(context),
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
