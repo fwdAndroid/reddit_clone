@@ -10,6 +10,7 @@ import 'package:reddit_clone/providers/firebase_providers.dart';
 import 'package:reddit_clone/utils/failure.dart';
 import 'package:reddit_clone/utils/type_defs.dart';
 
+
 final authRepositoryProvider = Provider(
   (ref) => AuthRepository(
     firestore: ref.read(firestoreProvider),
@@ -47,7 +48,7 @@ class AuthRepository {
       UserCredential userCredential =
           await _auth.signInWithCredential(credential);
 
-       UserModel userModel;
+      UserModel userModel;
       if (userCredential.additionalUserInfo!.isNewUser) {
         userModel = UserModel(
           name: userCredential.user!.displayName ?? 'No Name',
@@ -105,7 +106,8 @@ class AuthRepository {
   // }
 
   Stream<UserModel> getUserData(String uid) {
-    return _users.doc(uid).snapshots().map((event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
+    return _users.doc(uid).snapshots().map(
+        (event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
   }
 
   void logOut() async {

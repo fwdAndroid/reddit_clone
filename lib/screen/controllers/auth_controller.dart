@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reddit_clone/screen/auth_section/respository/auth_respositary.dart';
+import 'package:reddit_clone/models/user_model.dart';
+import 'package:reddit_clone/screen/respository/auth_respositary.dart';
 import 'package:reddit_clone/utils/snack_image.dart';
 
-// final userProvider = StateProvider<UserModel?>((ref) => null);
+final userProvider = StateProvider<UserModel?>((ref) => null);
 
 final authControllerProvider = StateNotifierProvider<AuthController, bool>(
   (ref) => AuthController(
@@ -36,10 +37,10 @@ class AuthController extends StateNotifier<bool> {
   void signInWithGoogle(
     BuildContext context,
   ) async {
-    // state = true;
+    state = true;
     final user = await _authRepository.signInWithGoogle();
-    // state = false;
-    user.fold((l) => showSnackBar(context, l.message), (r) => null);
+    state = false;
+    user.fold((l) => showSnackBar(context, l.message), (usermodel) => _ref.read(userProvider.notifier).update((state) => usermodel));
   }
 
   // void signInAsGuest(BuildContext context) async {
