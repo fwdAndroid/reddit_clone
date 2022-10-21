@@ -25,9 +25,9 @@ final communityControllerProvider =
   );
 });
 
-// final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
-//   return ref.watch(communityControllerProvider.notifier).getCommunityByName(name);
-// });
+final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
+  return ref.watch(communityControllerProvider.notifier).getCommunityByName(name);
+});
 
 // final searchCommunityProvider = StreamProvider.family((ref, String query) {
 //   return ref.watch(communityControllerProvider.notifier).searchCommunity(query);
@@ -94,9 +94,9 @@ class CommunityController extends StateNotifier<bool> {
     return _communityRepository.getUserCommunities(uid);
   }
 
-  // Stream<Community> getCommunityByName(String name) {
-  //   return _communityRepository.getCommunityByName(name);
-  // }
+  Stream<Community> getCommunityByName(String name) {
+    return _communityRepository.getCommunityByName(name);
+  }
 
   // void editCommunity({
   //   required File? profileFile,
