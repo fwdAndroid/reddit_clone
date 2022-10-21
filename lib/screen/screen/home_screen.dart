@@ -11,6 +11,40 @@ class Home_Screen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home'),
+        centerTitle: false,
+        leading: Builder(builder: (context) {
+          return IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {},
+            //  displayDrawer(context),
+          );
+        }),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // showSearch(
+              //     context: context, delegate: SearchCommunityDelegate(ref));
+            },
+            icon: const Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {
+              // Routemaster.of(context).push('/add-post');
+            },
+            icon: const Icon(Icons.add),
+          ),
+          Builder(builder: (context) {
+            return IconButton(
+              icon: CircleAvatar(
+                backgroundImage: NetworkImage(user.profilePic),
+              ),
+              onPressed: () {},
+            );
+          }),
+        ],
+      ),
       body: Center(
         child: Text(user.name),
       ),
