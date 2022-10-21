@@ -9,11 +9,11 @@ import 'package:reddit_clone/screen/respository/community_respositary.dart';
 import 'package:reddit_clone/utils/snack_image.dart';
 import 'package:routemaster/routemaster.dart';
 
-// final userCommunitiesProvider = StreamProvider((ref) {
-//   final communityController = ref.watch(communityControllerProvider.notifier);
-//   return communityController.getUserCommunities();
-// });
-
+final userCommunitiesProvider = StreamProvider((ref) {
+  final communityController = ref.watch(communityControllerProvider.notifier);
+  return communityController.getUserCommunities();
+});
+ 
 final communityControllerProvider =
     StateNotifierProvider<CommunityController, bool>((ref) {
   final communityRepository = ref.watch(communityRepositoryProvider);
@@ -89,10 +89,10 @@ class CommunityController extends StateNotifier<bool> {
   //   });
   // }
 
-  // Stream<List<Community>> getUserCommunities() {
-  //   final uid = _ref.read(userProvider)!.uid;
-  //   return _communityRepository.getUserCommunities(uid);
-  // }
+  Stream<List<Community>> getUserCommunities() {
+    final uid = _ref.read(userProvider)!.uid;
+    return _communityRepository.getUserCommunities(uid);
+  }
 
   // Stream<Community> getCommunityByName(String name) {
   //   return _communityRepository.getCommunityByName(name);
