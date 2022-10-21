@@ -3,22 +3,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:reddit_clone/constants/fiirebasecontanstants.dart';
 import 'package:reddit_clone/models/community_model.dart';
+import 'package:reddit_clone/providers/firebase_providers.dart';
 import 'package:reddit_clone/utils/failure.dart';
 import 'package:reddit_clone/utils/type_defs.dart';
 
 final communityRepositoryProvider = Provider((ref) {
-  // return CommunityRepository(firestore: ref.watch(firestoreProvider));
+  return CommunityRepository(firestore: ref.watch(firestoreProvider));
 });
 
 class CommunityRepository {
   final FirebaseFirestore _firestore;
-  CommunityRepository({required FirebaseFirestore firestore})
-      : _firestore = firestore;
+  CommunityRepository({required FirebaseFirestore firestore}) : _firestore = firestore;
 
-  CollectionReference get _posts =>
-      _firestore.collection(FirebaseConstants.postsCollection);
-  CollectionReference get _communities =>
-      _firestore.collection(FirebaseConstants.communitiesCollection);
+
+  
 
   FutureVoid createCommunity(Community community) async {
     try {
@@ -128,5 +126,8 @@ class CommunityRepository {
   //             .toList(),
   //       );
   // }
+
+  CollectionReference get _communities =>
+      _firestore.collection(FirebaseConstants.communitiesCollection);
 
 }

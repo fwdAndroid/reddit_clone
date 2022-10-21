@@ -38,43 +38,41 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
       ),
       body: isLoading
           ? Loader()
-          : Responsive(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    const Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('Community name'),
+          : Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  const Align(
+                    alignment: Alignment.topLeft,
+                    child: Text('Community name'),
+                  ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: communityNameController,
+                    decoration: const InputDecoration(
+                      hintText: 'r/Community_name',
+                      filled: true,
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(18),
                     ),
-                    const SizedBox(height: 10),
-                    TextField(
-                      controller: communityNameController,
-                      decoration: const InputDecoration(
-                        hintText: 'r/Community_name',
-                        filled: true,
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(18),
-                      ),
-                      maxLength: 21,
-                    ),
-                    const SizedBox(height: 30),
-                    ElevatedButton(
-                      onPressed: createCommunity,
-                      style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          )),
-                      child: const Text(
-                        'Create community',
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
+                    maxLength: 21,
+                  ),
+                  const SizedBox(height: 30),
+                  ElevatedButton(
+                    onPressed: createCommunity,
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        )),
+                    child: const Text(
+                      'Create community',
+                      style: TextStyle(
+                        fontSize: 17,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
     );
