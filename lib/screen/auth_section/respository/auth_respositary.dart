@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:reddit_clone/constants/constant.dart';
+import 'package:reddit_clone/constants/fiirebasecontanstants.dart';
+import 'package:reddit_clone/models/user_model.dart';
 import 'package:reddit_clone/providers/firebase_providers.dart';
 
 final authRepositoryProvider = Provider(
@@ -25,64 +28,32 @@ class AuthRepository {
         _firestore = firestore,
         _googleSignIn = googleSignIn;
 
-  // CollectionReference get _users => _firestore.collection(FirebaseConstants.usersCollection);
+  CollectionReference get _users =>
+      _firestore.collection(FirebaseConstants.usersCollection);
 
   Stream<User?> get authStateChange => _auth.authStateChanges();
 
   void signInWithGoogle() async {
     try {
-      UserCredential userCredential;
-      // if (kIsWeb) {
-      //   GoogleAuthProvider googleProvider = GoogleAuthProvider();
-      //   googleProvider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-      //   userCredential = await _auth.signInWithPopup(googleProvider);
-      // }
-
-      //  else {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-
       final googleAuth = await googleUser?.authentication;
 
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
+          accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+
+      UserModel userModel = UserModel(
+        name: userCredential.user!.displayName ?? 'No Name',
+        profilePic: Constants.avatarDefault,
+        banner: Constants.bannerDefault,
+        uid: userCredential.user!.uid,
+        isAuthenticated: true,
+        karma: 0,
+        awards: [],
       );
-      print(googleUser!.displayName);
-
-      // if (isFromLogin) {
-      //   userCredential = await _auth.signInWithCredential(credential);
-      // } else {
-      //   userCredential = await _auth.currentUser!.linkWithCredential(credential);
-      // }
-
-      // UserModel userModel;
-
-      // if (userCredential.additionalUserInfo!.isNewUser) {
-      //   userModel = UserModel(
-      //     name: userCredential.user!.displayName ?? 'No Name',
-      //     profilePic: userCredential.user!.photoURL ?? Constants.avatarDefault,
-      //     banner: Constants.bannerDefault,
-      //     uid: userCredential.user!.uid,
-      //     isAuthenticated: true,
-      //     karma: 0,
-      //     awards: [
-      //       'awesomeAns',
-      //       'gold',
-      //       'platinum',
-      //       'helpful',
-      //       'plusone',
-      //       'rocket',
-      //       'thankyou',
-      //       'til',
-      //     ],
-      //   );
-      //   await _users.doc(userCredential.user!.uid).set(userModel.toMap());
-      // } else {
-      //   userModel = await getUserData(userCredential.user!.uid).first;
-      // }
-      // return right(userModel);
-      // } on FirebaseException catch (e) {
-      //   throw e.message!;
+      await _users.doc(userCredential.user!.uid).set(userModel.toMap());
     } catch (e) {
       print(e);
     }
@@ -92,15 +63,15 @@ class AuthRepository {
   //   try {
   //     var userCredential = await _auth.signInAnonymously();
 
-  //     UserModel userModel = UserModel(
-  //       name: 'Guest',
-  //       profilePic: Constants.avatarDefault,
-  //       banner: Constants.bannerDefault,
-  //       uid: userCredential.user!.uid,
-  //       isAuthenticated: false,
-  //       karma: 0,
-  //       awards: [],
-  //     );
+  // UserModel userModel = UserModel(
+  //   name: 'Guest',
+  //   profilePic: Constants.avatarDefault,
+  //   banner: Constants.bannerDefault,
+  //   uid: userCredential.user!.uid,
+  //   isAuthenticated: false,
+  //   karma: 0,
+  //   awards: [],
+  // );
 
   //     await _users.doc(userCredential.user!.uid).set(userModel.toMap());
 

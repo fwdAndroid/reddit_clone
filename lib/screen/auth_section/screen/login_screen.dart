@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddit_clone/app_functions_constructor/responsive.dart';
-import 'package:reddit_clone/utils/constant.dart';
+import 'package:reddit_clone/constants/constant.dart';
 import 'package:reddit_clone/widgets/sign_in_button.dart';
 
 class LoginScreen extends StatelessWidget {

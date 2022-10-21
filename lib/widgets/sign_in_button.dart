@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reddit_clone/constants/constant.dart';
 import 'package:reddit_clone/screen/auth_section/controller/auth_controller.dart';
 import 'package:reddit_clone/widgets/theme.dart';
-
-import '../utils/constant.dart';
 
 class SignInButton extends ConsumerWidget {
   final bool isFromLogin;
