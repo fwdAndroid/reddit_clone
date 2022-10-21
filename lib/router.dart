@@ -2,6 +2,7 @@
 // loggedIn
 
 import 'package:flutter/material.dart';
+import 'package:reddit_clone/screen/screen/home_screen.dart';
 import 'package:reddit_clone/screen/screen/login_screen.dart';
 
 import 'package:routemaster/routemaster.dart';
@@ -11,7 +12,7 @@ final loggedOutRoute = RouteMap(routes: {
 });
 
 final loggedInRoute = RouteMap(routes: {
-  //'/': (_) => const MaterialPage(child: HomeScreen()),
+  '/': (_) => const MaterialPage(child: Home_Screen()),
   // '/create-community': (_) => const MaterialPage(child: CreateCommunityScreen()),
   // '/r/:name': (route) => MaterialPage(
   //       child: CommunityScreen(

@@ -10,7 +10,6 @@ import 'package:reddit_clone/providers/firebase_providers.dart';
 import 'package:reddit_clone/utils/failure.dart';
 import 'package:reddit_clone/utils/type_defs.dart';
 
-
 final authRepositoryProvider = Provider(
   (ref) => AuthRepository(
     firestore: ref.read(firestoreProvider),
@@ -35,6 +34,7 @@ class AuthRepository {
   CollectionReference get _users =>
       _firestore.collection(FirebaseConstants.usersCollection);
 
+//Auth State Check User login or not
   Stream<User?> get authStateChange => _auth.authStateChanges();
 
   FutureEither<UserModel> signInWithGoogle() async {
