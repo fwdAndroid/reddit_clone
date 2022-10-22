@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/screen/controllers/auth_controller.dart';
 import 'package:reddit_clone/widgets/drawers/community_list_drawers.dart';
+import 'package:reddit_clone/widgets/drawers/profile_drawer.dart';
 import 'package:reddit_clone/widgets/search_delegates/search_delegates.dart';
 
 class Home_Screen extends ConsumerWidget {
@@ -49,12 +50,13 @@ class Home_Screen extends ConsumerWidget {
               icon: CircleAvatar(
                 backgroundImage: NetworkImage(user.profilePic),
               ),
-              onPressed: () {},
+              onPressed: () => displayDrawer(context),
             );
           }),
         ],
       ),
       drawer: const CommunityListDrawer(),
+      endDrawer: const ProfileDrawer(),
       body: Center(
         child: Text(user.name),
       ),
