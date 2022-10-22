@@ -50,7 +50,7 @@ class Home_Screen extends ConsumerWidget {
               icon: CircleAvatar(
                 backgroundImage: NetworkImage(user.profilePic),
               ),
-              onPressed: () => displayDrawer(context),
+              onPressed: () => displayEndDrawer(context),
             );
           }),
         ],

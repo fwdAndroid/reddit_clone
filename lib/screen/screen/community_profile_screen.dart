@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reddit_clone/models/community_model.dart';
 import 'package:reddit_clone/screen/controllers/auth_controller.dart';
 import 'package:reddit_clone/screen/controllers/community_controller.dart';
 import 'package:reddit_clone/widgets/error.dart';
@@ -16,9 +17,11 @@ class CommunityScreen extends ConsumerWidget {
     Routemaster.of(context).push('/mod-tools/$name');
   }
 
-  // void joinCommunity(WidgetRef ref, Community community, BuildContext context) {
-  //   ref.read(communityControllerProvider.notifier).joinCommunity(community, context);
-  // }
+  void joinCommunity(WidgetRef ref, Community community, BuildContext context) {
+    ref
+        .read(communityControllerProvider.notifier)
+        .joinCommunity(community, context);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -84,9 +87,8 @@ class CommunityScreen extends ConsumerWidget {
                                       child: const Text('Mod Tools'),
                                     )
                                   : OutlinedButton(
-                                      onPressed: () {
-                                        //                      joinCommunity(ref, community, context),
-                                      },
+                                      onPressed: () => joinCommunity(
+                                          ref, community, context),
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
