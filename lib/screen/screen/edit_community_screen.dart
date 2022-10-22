@@ -11,6 +11,7 @@ import 'package:reddit_clone/screen/controllers/community_controller.dart';
 import 'package:reddit_clone/utils/snack_image.dart';
 import 'package:reddit_clone/widgets/error.dart';
 import 'package:reddit_clone/widgets/loader.dart';
+import 'package:reddit_clone/widgets/theme.dart';
 
 class EditCommunityScreen extends ConsumerStatefulWidget {
   final String name;
@@ -76,11 +77,11 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
   @override
   Widget build(BuildContext context) {
     final isLoading = ref.watch(communityControllerProvider);
-    // final currentTheme = ref.watch(themeNotifierProvider);
+    final currentTheme = ref.watch(themeNotifierProvider);
 
     return ref.watch(getCommunityByNameProvider(widget.name)).when(
           data: (community) => Scaffold(
-            //  backgroundColor: currentTheme.backgroundColor,
+             backgroundColor: currentTheme.backgroundColor,
             appBar: AppBar(
               title: const Text('Edit Community'),
               centerTitle: false,
@@ -114,7 +115,7 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
                                     radius: const Radius.circular(10),
                                     dashPattern: const [10, 4],
                                     strokeCap: StrokeCap.round,
-                                    color: Colors.white,
+                                    color: currentTheme.textTheme.bodyText2!.color!,
                                     child: Container(
                                       width: double.infinity,
                                       height: 150,
