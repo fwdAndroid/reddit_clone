@@ -20,9 +20,9 @@ class PostCard extends ConsumerWidget {
     required this.post,
   });
 
-  // void deletePost(WidgetRef ref, BuildContext context) async {
-  //   ref.read(postControllerProvider.notifier).deletePost(post, context);
-  // }
+  void deletePost(WidgetRef ref, BuildContext context) async {
+    ref.read(postControllerProvider.notifier).deletePost(post, context);
+  }
 
   // void upvotePost(WidgetRef ref) async {
   //   ref.read(postControllerProvider.notifier).upvote(post);
@@ -155,9 +155,7 @@ class PostCard extends ConsumerWidget {
                                 ),
                                 if (post.uid == user.uid)
                                   IconButton(
-                                    onPressed: () {},
-
-                                    //  onPressed: () => deletePost(ref, context),
+                                    onPressed: () => deletePost(ref, context),
                                     icon: Icon(
                                       Icons.delete,
                                       color: Pallete.redColor,
@@ -284,9 +282,8 @@ class PostCard extends ConsumerWidget {
                                       data: (data) {
                                         if (data.mods.contains(user.uid)) {
                                           return IconButton(
-                                            onPressed: () {},
-
-                                            //    onPressed: () => deletePost(ref, context),
+                                            onPressed: () =>
+                                                deletePost(ref, context),
                                             icon: const Icon(
                                               Icons.admin_panel_settings,
                                             ),
