@@ -19,7 +19,7 @@ final loggedOutRoute = RouteMap(routes: {
 });
 
 final loggedInRoute = RouteMap(routes: {
-  '/': (_) => const MaterialPage(child: Home_Screen()),
+  '/': (_) => const MaterialPage(child: HomeScreen()),
   '/create-community': (_) =>
       const MaterialPage(child: CreateCommunityScreen()),
   '/r/:name': (route) => MaterialPage(
