@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:reddit_clone/constants/fiirebasecontanstants.dart';
+import 'package:reddit_clone/models/community_model.dart';
 import 'package:reddit_clone/providers/firebase_providers.dart';
 import 'package:reddit_clone/utils/failure.dart';
 import 'package:reddit_clone/utils/type_defs.dart';
@@ -32,21 +33,21 @@ class PostRepository {
     }
   }
 
-  // Stream<List<Post>> fetchUserPosts(List<Community> communities) {
-  //   return _posts
-  //       .where('communityName', whereIn: communities.map((e) => e.name).toList())
-  //       .orderBy('createdAt', descending: true)
-  //       .snapshots()
-  //       .map(
-  //         (event) => event.docs
-  //             .map(
-  //               (e) => Post.fromMap(
-  //                 e.data() as Map<String, dynamic>,
-  //               ),
-  //             )
-  //             .toList(),
-  //       );
-  // }
+  Stream<List<Post>> fetchUserPosts(List<Community> communities) {
+    return _posts
+        .where('communityName', whereIn: communities.map((e) => e.name).toList())
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map(
+          (event) => event.docs
+              .map(
+                (e) => Post.fromMap(
+                  e.data() as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
+        );
+  }
 
   // Stream<List<Post>> fetchGuestPosts() {
   //   return _posts.orderBy('createdAt', descending: true).limit(10).snapshots().map(
