@@ -9,6 +9,7 @@ import 'package:reddit_clone/screen/screen/edit_community_screen.dart';
 import 'package:reddit_clone/screen/screen/home_screen.dart';
 import 'package:reddit_clone/screen/screen/login_screen.dart';
 import 'package:reddit_clone/screen/screen/mod_tools_screen.dart';
+import 'package:reddit_clone/screen/screen/user_profile_screen.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -40,11 +41,11 @@ final loggedInRoute = RouteMap(routes: {
           name: routeData.pathParameters['name']!,
         ),
       ),
-  // '/u/:uid': (routeData) => MaterialPage(
-  //       child: UserProfileScreen(
-  //         uid: routeData.pathParameters['uid']!,
-  //       ),
-  //     ),
+  '/u/:uid': (routeData) => MaterialPage(
+        child: UserProfileScreen(
+          uid: routeData.pathParameters['uid']!,
+        ),
+      ),
   // '/edit-profile/:uid': (routeData) => MaterialPage(
   //       child: EditProfileScreen(
   //         uid: routeData.pathParameters['uid']!,
