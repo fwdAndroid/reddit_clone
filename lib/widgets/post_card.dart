@@ -24,13 +24,13 @@ class PostCard extends ConsumerWidget {
     ref.read(postControllerProvider.notifier).deletePost(post, context);
   }
 
-  // void upvotePost(WidgetRef ref) async {
-  //   ref.read(postControllerProvider.notifier).upvote(post);
-  // }
+  void upvotePost(WidgetRef ref) async {
+    ref.read(postControllerProvider.notifier).upvote(post);
+  }
 
-  // void downvotePost(WidgetRef ref) async {
-  //   ref.read(postControllerProvider.notifier).downvote(post);
-  // }
+  void downvotePost(WidgetRef ref) async {
+    ref.read(postControllerProvider.notifier).downvote(post);
+  }
 
   // void awardPost(WidgetRef ref, String award, BuildContext context) async {
   //   ref.read(postControllerProvider.notifier).awardPost(post: post, award: award, context: context);
@@ -73,8 +73,7 @@ class PostCard extends ConsumerWidget {
                   Column(
                     children: [
                       IconButton(
-                        onPressed: () {},
-                        //onPressed: isGuest ? () {} : () => upvotePost(ref),
+                        onPressed: () => upvotePost(ref),
                         icon: Icon(
                           Constants.up,
                           size: 30,
@@ -88,7 +87,7 @@ class PostCard extends ConsumerWidget {
                         style: const TextStyle(fontSize: 17),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () => downvotePost(ref),
 
                         //  onPressed: isGuest ? () {} : () => downvotePost(ref),
                         icon: Icon(
@@ -230,7 +229,7 @@ class PostCard extends ConsumerWidget {
                                   Row(
                                     children: [
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () => upvotePost(ref),
 
                                         //   onPressed: isGuest ? () {} : () => upvotePost(ref),
                                         icon: Icon(
@@ -246,7 +245,7 @@ class PostCard extends ConsumerWidget {
                                         style: const TextStyle(fontSize: 17),
                                       ),
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () => downvotePost(ref),
 
                                         //  onPressed: isGuest ? () {} : () => downvotePost(ref),
                                         icon: Icon(

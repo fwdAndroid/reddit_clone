@@ -71,41 +71,41 @@ class PostRepository {
     }
   }
 
-  // void upvote(Post post, String userId) async {
-  //   if (post.downvotes.contains(userId)) {
-  //     _posts.doc(post.id).update({
-  //       'downvotes': FieldValue.arrayRemove([userId]),
-  //     });
-  //   }
+  void upvote(Post post, String userId) async {
+    if (post.downvotes.contains(userId)) {
+      _posts.doc(post.id).update({
+        'downvotes': FieldValue.arrayRemove([userId]),
+      });
+    }
 
-  //   if (post.upvotes.contains(userId)) {
-  //     _posts.doc(post.id).update({
-  //       'upvotes': FieldValue.arrayRemove([userId]),
-  //     });
-  //   } else {
-  //     _posts.doc(post.id).update({
-  //       'upvotes': FieldValue.arrayUnion([userId]),
-  //     });
-  //   }
-  // }
+    if (post.upvotes.contains(userId)) {
+      _posts.doc(post.id).update({
+        'upvotes': FieldValue.arrayRemove([userId]),
+      });
+    } else {
+      _posts.doc(post.id).update({
+        'upvotes': FieldValue.arrayUnion([userId]),
+      });
+    }
+  }
 
-  // void downvote(Post post, String userId) async {
-  //   if (post.upvotes.contains(userId)) {
-  //     _posts.doc(post.id).update({
-  //       'upvotes': FieldValue.arrayRemove([userId]),
-  //     });
-  //   }
+  void downvote(Post post, String userId) async {
+    if (post.upvotes.contains(userId)) {
+      _posts.doc(post.id).update({
+        'upvotes': FieldValue.arrayRemove([userId]),
+      });
+    }
 
-  //   if (post.downvotes.contains(userId)) {
-  //     _posts.doc(post.id).update({
-  //       'downvotes': FieldValue.arrayRemove([userId]),
-  //     });
-  //   } else {
-  //     _posts.doc(post.id).update({
-  //       'downvotes': FieldValue.arrayUnion([userId]),
-  //     });
-  //   }
-  // }
+    if (post.downvotes.contains(userId)) {
+      _posts.doc(post.id).update({
+        'downvotes': FieldValue.arrayRemove([userId]),
+      });
+    } else {
+      _posts.doc(post.id).update({
+        'downvotes': FieldValue.arrayUnion([userId]),
+      });
+    }
+  }
 
   // Stream<Post> getPostById(String postId) {
   //   return _posts.doc(postId).snapshots().map((event) => Post.fromMap(event.data() as Map<String, dynamic>));
