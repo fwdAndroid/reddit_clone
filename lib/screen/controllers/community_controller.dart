@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
@@ -16,7 +15,7 @@ final userCommunitiesProvider = StreamProvider((ref) {
   final communityController = ref.watch(communityControllerProvider.notifier);
   return communityController.getUserCommunities();
 });
- 
+
 final communityControllerProvider =
     StateNotifierProvider<CommunityController, bool>((ref) {
   final communityRepository = ref.watch(communityRepositoryProvider);
@@ -29,7 +28,9 @@ final communityControllerProvider =
 });
 
 final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
-  return ref.watch(communityControllerProvider.notifier).getCommunityByName(name);
+  return ref
+      .watch(communityControllerProvider.notifier)
+      .getCommunityByName(name);
 });
 
 final searchCommunityProvider = StreamProvider.family((ref, String query) {
@@ -150,13 +151,14 @@ class CommunityController extends StateNotifier<bool> {
     return _communityRepository.searchCommunity(query);
   }
 
-  // void addMods(String communityName, List<String> uids, BuildContext context) async {
-  //   final res = await _communityRepository.addMods(communityName, uids);
-  //   res.fold(
-  //     (l) => showSnackBar(context, l.message),
-  //     (r) => Routemaster.of(context).pop(),
-  //   );
-  // }
+  void addMods(
+      String communityName, List<String> uids, BuildContext context) async {
+    final res = await _communityRepository.addMods(communityName, uids);
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => Routemaster.of(context).pop(),
+    );
+  }
 
   // Stream<List<Post>> getCommunityPosts(String name) {
   //   return _communityRepository.getCommunityPosts(name);
