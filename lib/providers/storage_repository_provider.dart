@@ -1,44 +1,41 @@
-// import 'dart:io';
-// import 'package:firebase_storage/firebase_storage.dart';
-// import 'package:flutter/foundation.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:fpdart/fpdart.dart';
-// // import 'package:reddit_tutorial/core/failure.dart';
-// // import 'package:reddit_tutorial/core/providers/firebase_providers.dart';
-// // import 'package:reddit_tutorial/core/type_defs.dart';
+import 'dart:io';
 
-// final storageRepositoryProvider = Provider(
-//   (ref) => StorageRepository(
-//     firebaseStorage: ref.watch(storageProvider),
-//   ),
-// );
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:reddit_clone/providers/firebase_providers.dart';
+import 'package:reddit_clone/utils/failure.dart';
+import 'package:reddit_clone/utils/type_defs.dart';
 
-// class StorageRepository {
-//   final FirebaseStorage _firebaseStorage;
+final storageRepositoryProvider = Provider(
+  (ref) => StorageRepository(
+    firebaseStorage: ref.watch(storageProvider),
+  ),
+);
 
-//   StorageRepository({required FirebaseStorage firebaseStorage}) : _firebaseStorage = firebaseStorage;
+class StorageRepository {
+  final FirebaseStorage _firebaseStorage;
 
-//   FutureEither<String> storeFile({
-//     required String path,
-//     required String id,
-//     required File? file,
-//     required Uint8List? webFile,
-//   }) async {
-//     try {
-//       final ref = _firebaseStorage.ref().child(path).child(id);
-//       UploadTask uploadTask;
+  StorageRepository({required FirebaseStorage firebaseStorage})
+      : _firebaseStorage = firebaseStorage;
 
-//       if (kIsWeb) {
-//         uploadTask = ref.putData(webFile!);
-//       } else {
-//         uploadTask = ref.putFile(file!);
-//       }
+  FutureEither<String> storeFile({
+    required String path,
+    required String id,
+    required File? file,
+    // required Uint8List? webFile,
+  }) async {
+    try {
+      final ref = _firebaseStorage.ref().child(path).child(id);
+      UploadTask uploadTask;
 
-//       final snapshot = await uploadTask;
+      uploadTask = ref.putFile(file!);
 
-//       return right(await snapshot.ref.getDownloadURL());
-//     } catch (e) {
-//       return left(Failure(e.toString()));
-//     }
-//   }
-// }
+      final snapshot = await uploadTask;
+
+      return right(await snapshot.ref.getDownloadURL());
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+}

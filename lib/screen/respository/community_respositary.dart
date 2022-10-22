@@ -71,15 +71,15 @@ class CommunityRepository {
     return _communities.doc(name).snapshots().map((event) => Community.fromMap(event.data() as Map<String, dynamic>));
   }
 
-  // FutureVoid editCommunity(Community community) async {
-  //   try {
-  //     return right(_communities.doc(community.name).update(community.toMap()));
-  //   } on FirebaseException catch (e) {
-  //     throw e.message!;
-  //   } catch (e) {
-  //     return left(Failure(e.toString()));
-  //   }
-  // }
+  FutureVoid editCommunity(Community community) async {
+    try {
+      return right(_communities.doc(community.name).update(community.toMap()));
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
 
   // Stream<List<Community>> searchCommunity(String query) {
   //   return _communities
