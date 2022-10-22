@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/screen/controllers/auth_controller.dart';
 import 'package:reddit_clone/widgets/drawers/community_list_drawers.dart';
+import 'package:reddit_clone/widgets/search_delegates/search_delegates.dart';
 
 class Home_Screen extends ConsumerWidget {
   const Home_Screen({Key? key}) : super(key: key);
@@ -32,8 +33,8 @@ class Home_Screen extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // showSearch(
-              //     context: context, delegate: SearchCommunityDelegate(ref));
+              showSearch(
+                  context: context, delegate: SearchCommunityDelegate(ref));
             },
             icon: const Icon(Icons.search),
           ),
