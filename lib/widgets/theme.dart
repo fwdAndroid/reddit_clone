@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 // final themeNotifierProvider = StateNotifierProvider<ThemeNotifier, ThemeData>((ref) {
@@ -80,12 +80,12 @@ class Pallete {
 
 //     if (_mode == ThemeMode.dark) {
 //       _mode = ThemeMode.light;
-//       state = Pallete.lightModeAppTheme;
-//       prefs.setString('theme', 'light');
-//     } else {
-//       _mode = ThemeMode.dark;
-//       state = Pallete.darkModeAppTheme;
-//       prefs.setString('theme', 'dark');
-//     }
-//   }
-// }
+// //       state = Pallete.lightModeAppTheme;
+// //       prefs.setString('theme', 'light');
+// //     } else {
+// //       _mode = ThemeMode.dark;
+// //       state = Pallete.darkModeAppTheme;
+// //       prefs.setString('theme', 'dark');
+// //     }
+// //   }
+// // }
