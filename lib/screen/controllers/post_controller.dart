@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reddit_clone/models/comment_model.dart';
 import 'package:reddit_clone/models/community_model.dart';
 import 'package:reddit_clone/models/post_models.dart';
 import 'package:reddit_clone/providers/storage_repository_provider.dart';
 import 'package:reddit_clone/screen/controllers/auth_controller.dart';
-import 'package:reddit_clone/screen/controllers/user_profile_controller.dart';
 import 'package:reddit_clone/screen/respository/add_post_respositary.dart';
 import 'package:reddit_clone/utils/snack_image.dart';
 import 'package:routemaster/routemaster.dart';
@@ -34,15 +34,15 @@ final userPostsProvider =
 //   return postController.fetchGuestPosts();
 // });
 
-// final getPostByIdProvider = StreamProvider.family((ref, String postId) {
-//   final postController = ref.watch(postControllerProvider.notifier);
-//   return postController.getPostById(postId);
-// });
+final getPostByIdProvider = StreamProvider.family((ref, String postId) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.getPostById(postId);
+});
 
-// final getPostCommentsProvider = StreamProvider.family((ref, String postId) {
-//   final postController = ref.watch(postControllerProvider.notifier);
-//   return postController.fetchPostComments(postId);
-// });
+final getPostCommentsProvider = StreamProvider.family((ref, String postId) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.fetchPostComments(postId);
+});
 
 class PostController extends StateNotifier<bool> {
   final PostRepository _postRepository;
@@ -196,29 +196,29 @@ class PostController extends StateNotifier<bool> {
     _postRepository.downvote(post, uid);
   }
 
-  // Stream<Post> getPostById(String postId) {
-  //   return _postRepository.getPostById(postId);
-  // }
+  Stream<Post> getPostById(String postId) {
+    return _postRepository.getPostById(postId);
+  }
 
-  // void addComment({
-  //   required BuildContext context,
-  //   required String text,
-  //   required Post post,
-  // }) async {
-  //   final user = _ref.read(userProvider)!;
-  //   String commentId = const Uuid().v1();
-  //   Comment comment = Comment(
-  //     id: commentId,
-  //     text: text,
-  //     createdAt: DateTime.now(),
-  //     postId: post.id,
-  //     username: user.name,
-  //     profilePic: user.profilePic,
-  //   );
-  //   final res = await _postRepository.addComment(comment);
-  //   _ref.read(userProfileControllerProvider.notifier).updateUserKarma(UserKarma.comment);
-  //   res.fold((l) => showSnackBar(context, l.message), (r) => null);
-  // }
+  void addComment({
+    required BuildContext context,
+    required String text,
+    required Post post,
+  }) async {
+    final user = _ref.read(userProvider)!;
+    String commentId = const Uuid().v1();
+    Comment comment = Comment(
+      id: commentId,
+      text: text,
+      createdAt: DateTime.now(),
+      postId: post.id,
+      username: user.name,
+      profilePic: user.profilePic,
+    );
+    final res = await _postRepository.addComment(comment);
+  //  _ref.read(userProfileControllerProvider.notifier).updateUserKarma(UserKarma.comment);
+    res.fold((l) => showSnackBar(context, l.message), (r) => null);
+  }
 
   // void awardPost({
   //   required Post post,
@@ -239,7 +239,7 @@ class PostController extends StateNotifier<bool> {
   //   });
   // }
 
-  // Stream<List<Comment>> fetchPostComments(String postId) {
-  //   return _postRepository.getCommentsOfPost(postId);
-  // }
+  Stream<List<Comment>> fetchPostComments(String postId) {
+    return _postRepository.getCommentsOfPost(postId);
+  }
 }

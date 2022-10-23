@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:reddit_clone/screen/screen/add_moddarator_screen.dart';
 import 'package:reddit_clone/screen/screen/bottombarpages/add_post_screen.dart';
 import 'package:reddit_clone/screen/screen/bottombarpages/add_post_type_screen.dart';
+import 'package:reddit_clone/screen/screen/comment_screen.dart';
 import 'package:reddit_clone/screen/screen/community_profile_screen.dart';
 import 'package:reddit_clone/screen/screen/create_community_screen.dart';
 import 'package:reddit_clone/screen/screen/edit_community_screen.dart';
@@ -59,11 +60,11 @@ final loggedInRoute = RouteMap(routes: {
           type: routeData.pathParameters['type']!,
         ),
       ),
-  // '/post/:postId/comments': (route) => MaterialPage(
-  //       child: CommentsScreen(
-  //         postId: route.pathParameters['postId']!,
-  //       ),
-  //     ),
+  '/post/:postId/comments': (route) => MaterialPage(
+        child: CommentsScreen(
+          postId: route.pathParameters['postId']!,
+        ),
+      ),
   '/add-post': (routeData) => const MaterialPage(
         child: AddPostScreen(),
       ),
