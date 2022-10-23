@@ -281,9 +281,10 @@ class PostCard extends ConsumerWidget {
                                       data: (data) {
                                         if (data.mods.contains(user.uid)) {
                                           return IconButton(
+                                            color: Colors.pink,
                                             onPressed: () =>
                                                 deletePost(ref, context),
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.admin_panel_settings,
                                             ),
                                           );
