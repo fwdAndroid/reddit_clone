@@ -8,6 +8,7 @@ import 'package:reddit_clone/models/user_model.dart';
 import 'package:reddit_clone/providers/storage_repository_provider.dart';
 import 'package:reddit_clone/screen/controllers/auth_controller.dart';
 import 'package:reddit_clone/screen/respository/user_profile_respositary.dart';
+import 'package:reddit_clone/utils/enums.dart';
 import 'package:reddit_clone/utils/snack_image.dart';
 
 import 'package:routemaster/routemaster.dart';
@@ -92,11 +93,11 @@ class UserProfileController extends StateNotifier<bool> {
     return _userProfileRepository.getUserPosts(uid);
   }
 
-  // void updateUserKarma(UserKarma karma) async {
-  //   UserModel user = _ref.read(userProvider)!;
-  //   user = user.copyWith(karma: user.karma + karma.karma);
+  void updateUserKarma(UserKarma karma) async {
+    UserModel user = _ref.read(userProvider)!;
+    user = user.copyWith(karma: user.karma + karma.karma);
 
-  //   final res = await _userProfileRepository.updateUserKarma(user);
-  //   res.fold((l) => null, (r) => _ref.read(userProvider.notifier).update((state) => user));
-  // }
+    final res = await _userProfileRepository.updateUserKarma(user);
+    res.fold((l) => null, (r) => _ref.read(userProvider.notifier).update((state) => user));
+  }
 }
