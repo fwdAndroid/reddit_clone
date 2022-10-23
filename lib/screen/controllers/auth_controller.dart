@@ -5,6 +5,7 @@ import 'package:reddit_clone/models/user_model.dart';
 import 'package:reddit_clone/screen/respository/auth_respositary.dart';
 import 'package:reddit_clone/utils/snack_image.dart';
 
+
 final userProvider = StateProvider<UserModel?>((ref) => null);
 
 final authControllerProvider = StateNotifierProvider<AuthController, bool>(
@@ -34,13 +35,14 @@ class AuthController extends StateNotifier<bool> {
 
   Stream<User?> get authStateChange => _authRepository.authStateChange;
 
-  void signInWithGoogle(
-    BuildContext context,
-  ) async {
+  void signInWithGoogle(BuildContext context, bool isFromLogin) async {
     state = true;
-    final user = await _authRepository.signInWithGoogle();
+    final user = await _authRepository.signInWithGoogle(isFromLogin);
     state = false;
-    user.fold((l) => showSnackBar(context, l.message), (usermodel) => _ref.read(userProvider.notifier).update((state) => usermodel));
+    user.fold(
+      (l) => showSnackBar(context, l.message),
+      (userModel) => _ref.read(userProvider.notifier).update((state) => userModel),
+    );
   }
 
   void signInAsGuest(BuildContext context) async {

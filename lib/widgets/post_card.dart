@@ -33,7 +33,9 @@ class PostCard extends ConsumerWidget {
   }
 
   void awardPost(WidgetRef ref, String award, BuildContext context) async {
-    ref.read(postControllerProvider.notifier).awardPost(post: post, award: award, context: context);
+    ref
+        .read(postControllerProvider.notifier)
+        .awardPost(post: post, award: award, context: context);
   }
 
   void navigateToUser(BuildContext context) {
@@ -87,9 +89,8 @@ class PostCard extends ConsumerWidget {
                         style: const TextStyle(fontSize: 17),
                       ),
                       IconButton(
-                        onPressed: () => downvotePost(ref),
-
-                        //  onPressed: isGuest ? () {} : () => downvotePost(ref),
+                        onPressed: () =>
+                            isGuest ? () {} : () => downvotePost(ref),
                         icon: Icon(
                           Constants.down,
                           size: 30,
@@ -229,9 +230,9 @@ class PostCard extends ConsumerWidget {
                                   Row(
                                     children: [
                                       IconButton(
-                                        onPressed: () => upvotePost(ref),
-
-                                        //   onPressed: isGuest ? () {} : () => upvotePost(ref),
+                                        onPressed: () => isGuest
+                                            ? () {}
+                                            : () => upvotePost(ref),
                                         icon: Icon(
                                           Constants.up,
                                           size: 30,
@@ -245,9 +246,9 @@ class PostCard extends ConsumerWidget {
                                         style: const TextStyle(fontSize: 17),
                                       ),
                                       IconButton(
-                                        onPressed: () => downvotePost(ref),
-
-                                        //  onPressed: isGuest ? () {} : () => downvotePost(ref),
+                                        onPressed: () => isGuest
+                                            ? () {}
+                                            : () => downvotePost(ref),
                                         icon: Icon(
                                           Constants.down,
                                           size: 30,
@@ -320,7 +321,8 @@ class PostCard extends ConsumerWidget {
                                                         user.awards[index];
 
                                                     return InkWell(
-                                                      onTap: () =>  awardPost(ref, award, context),
+                                                      onTap: () => awardPost(
+                                                          ref, award, context),
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsets
