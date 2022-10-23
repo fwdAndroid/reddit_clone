@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reddit_clone/models/post_models.dart';
 import 'package:reddit_clone/models/user_model.dart';
 import 'package:reddit_clone/providers/storage_repository_provider.dart';
 import 'package:reddit_clone/screen/controllers/auth_controller.dart';
@@ -21,9 +22,9 @@ final userProfileControllerProvider = StateNotifierProvider<UserProfileControlle
   );
 });
 
-// final getUserPostsProvider = StreamProvider.family((ref, String uid) {
-//   return ref.read(userProfileControllerProvider.notifier).getUserPosts(uid);
-// });
+final getUserPostsProvider = StreamProvider.family((ref, String uid) {
+  return ref.read(userProfileControllerProvider.notifier).getUserPosts(uid);
+});
 
 class UserProfileController extends StateNotifier<bool> {
   final UserProfileRepository _userProfileRepository;
@@ -87,9 +88,9 @@ class UserProfileController extends StateNotifier<bool> {
     );
   }
 
-  // Stream<List<Post>> getUserPosts(String uid) {
-  //   return _userProfileRepository.getUserPosts(uid);
-  // }
+  Stream<List<Post>> getUserPosts(String uid) {
+    return _userProfileRepository.getUserPosts(uid);
+  }
 
   // void updateUserKarma(UserKarma karma) async {
   //   UserModel user = _ref.read(userProvider)!;

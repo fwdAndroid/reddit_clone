@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:reddit_clone/constants/constant.dart';
 import 'package:reddit_clone/models/community_model.dart';
+import 'package:reddit_clone/models/post_models.dart';
 import 'package:reddit_clone/providers/storage_repository_provider.dart';
 import 'package:reddit_clone/screen/controllers/auth_controller.dart';
 import 'package:reddit_clone/screen/respository/community_respositary.dart';
@@ -37,9 +38,9 @@ final searchCommunityProvider = StreamProvider.family((ref, String query) {
   return ref.watch(communityControllerProvider.notifier).searchCommunity(query);
 });
 
-// final getCommunityPostsProvider = StreamProvider.family((ref, String name) {
-//   return ref.read(communityControllerProvider.notifier).getCommunityPosts(name);
-// });
+final getCommunityPostsProvider = StreamProvider.family((ref, String name) {
+  return ref.read(communityControllerProvider.notifier).getCommunityPosts(name);
+});
 
 class CommunityController extends StateNotifier<bool> {
   final CommunityRepository _communityRepository;
@@ -160,7 +161,7 @@ class CommunityController extends StateNotifier<bool> {
     );
   }
 
-  // Stream<List<Post>> getCommunityPosts(String name) {
-  //   return _communityRepository.getCommunityPosts(name);
-  // }
+  Stream<List<Post>> getCommunityPosts(String name) {
+    return _communityRepository.getCommunityPosts(name);
+  }
 }

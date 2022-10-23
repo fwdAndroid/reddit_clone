@@ -5,6 +5,7 @@ import 'package:reddit_clone/screen/controllers/auth_controller.dart';
 import 'package:reddit_clone/screen/controllers/community_controller.dart';
 import 'package:reddit_clone/widgets/error.dart';
 import 'package:reddit_clone/widgets/loader.dart';
+import 'package:reddit_clone/widgets/post_card.dart';
 import 'package:routemaster/routemaster.dart';
 
 class CommunityScreen extends ConsumerWidget {
@@ -116,22 +117,21 @@ class CommunityScreen extends ConsumerWidget {
                   ),
                 ];
               },
-              body: Text(""),
-              // body: ref.watch(getCommunityPostsProvider(name)).when(
-              //       data: (data) {
-              //         return ListView.builder(
-              //           itemCount: data.length,
-              //           itemBuilder: (BuildContext context, int index) {
-              //             final post = data[index];
-              //             return PostCard(post: post);
-              //           },
-              //         );
-              //       },
-              //       error: (error, stackTrace) {
-              //         return ErrorText(error: error.toString());
-              //       },
-              //       loading: () => const Loader(),
-              //     ),
+              body: ref.watch(getCommunityPostsProvider(name)).when(
+                    data: (data) {
+                      return ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final post = data[index];
+                          return PostCard(post: post);
+                        },
+                      );
+                    },
+                    error: (error, stackTrace) {
+                      return ErrorText(error: error.toString());
+                    },
+                    loading: () => const Loader(),
+                  ),
             ),
             error: (error, stackTrace) => ErrorText(error: error.toString()),
             loading: () => const Loader(),
